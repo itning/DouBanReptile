@@ -28,7 +28,6 @@ var isIncludeNoContentPrice *bool
 func main() {
 	handleArgs()
 	headerMap := make(map[string]string)
-
 	headerMap["User-Agent"] = request.UserAgentPCChrome
 
 	dispatcher = scheduler.Dispatcher{
@@ -72,6 +71,7 @@ func write2File() {
 			panic(err)
 		}
 	}()
+	log.Printf("Size: %d\n", len(dataArray))
 	write([]byte(dataArray.String()))
 }
 
@@ -134,7 +134,7 @@ func content(nodes xpath.Nodes, request request.Data) {
 		// 处理时间
 		timeStr := handleTime(node)
 
-		dataArray = append(dataArray, markdown.Data{
+		dataArray.Append(markdown.Data{
 			TimeString: timeStr,
 			Time:       markdown.String2Time(timeStr),
 			Title:      format(title),

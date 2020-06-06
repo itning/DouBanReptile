@@ -24,6 +24,10 @@ type Data struct {
 
 type DataArray []Data
 
+func (p *DataArray) Append(d Data) {
+	*p = append(*p, d)
+}
+
 func (p DataArray) String() string {
 	sort.Sort(p)
 	str := ""
