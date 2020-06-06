@@ -5,6 +5,7 @@ import (
 	"DouBanReptile/internal/request"
 	"DouBanReptile/internal/scheduler"
 	"DouBanReptile/internal/xpath"
+	"flag"
 	"github.com/antchfx/htmlquery"
 	"golang.org/x/net/html"
 	"log"
@@ -19,8 +20,13 @@ var dispatcher scheduler.Dispatcher
 var file *os.File
 var priceCompile = regexp.MustCompile(`\b\d{4}\b`)
 var dataArray = make(markdown.DataArray, 0)
+var doesNotAppear []string
+var groupURL *string
+var maxPrice *int
+var isIncludeNoContentPrice *bool
 
 func main() {
+	handleArgs()
 	headerMap := make(map[string]string)
 
 	headerMap["User-Agent"] = request.UserAgentPCChrome
@@ -30,13 +36,29 @@ func main() {
 		Headers: headerMap,
 	}
 	dispatcher.Init2(
-		"/group/554566/discussion?start=%d",
+		*groupURL,
 		`//td[@class='title']/a`,
 		each,
 		time.Millisecond*500,
 		&scheduler.PaginationRange{StartSize: 0, EndSize: 50, EveryAdd: 25})
 
 	write2File()
+}
+
+func handleArgs() {
+	excludeKey := flag.String("e", "限女", "排除关键字用|分隔")
+	groupURL = flag.String("g", "/group/554566/discussion?start=%d", "设置豆瓣群组链接")
+	maxPrice = flag.Int("m", 1500, "设置最大价格")
+	isIncludeNoContentPrice = flag.Bool("i", false, "设置包含不带价格的")
+	flag.Parse()
+	excludeKeyArray := strings.Split(*excludeKey, "|")
+	for _, key := range excludeKeyArray {
+		doesNotAppear = append(doesNotAppear, key)
+	}
+	log.Printf("群组：%s\n", *groupURL)
+	log.Printf("排除关键字：%s\n", doesNotAppear)
+	log.Printf("最大价格：%d\n", *maxPrice)
+	log.Printf("包含不带价格的：%t\n", *isIncludeNoContentPrice)
 }
 
 func write2File() {
@@ -63,17 +85,25 @@ func each(nodes xpath.Nodes, request request.Data) {
 	hrefs := nodes.Attr("href")
 	titles := nodes.Attr("title")
 	for index, href := range hrefs {
-		// 不出现"限女"
-		if !strings.Contains(titles[index], "限女") {
-			price := getPriceFromString(titles[index])
-			// 价格1500以内
-			if price != 0 && price <= 1500 {
-				dispatcher.Add(href, `//div[@class="article"]`, content)
-			} else if price == 0 {
-				//dispatcher.Add(href, `//div[@class="article"]`, content)
-			}
+		if isExcludeContent(titles[index]) {
+			continue
+		}
+		price := getPriceFromString(titles[index])
+		if price != 0 && price <= (*maxPrice) {
+			dispatcher.Add(href, `//div[@class="article"]`, content)
+		} else if price == 0 && *isIncludeNoContentPrice {
+			dispatcher.Add(href, `//div[@class="article"]`, content)
 		}
 	}
+}
+
+func isExcludeContent(content string) bool {
+	for _, key := range doesNotAppear {
+		if strings.Contains(content, key) {
+			return true
+		}
+	}
+	return false
 }
 
 func getPriceFromString(title string) int {
