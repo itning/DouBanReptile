@@ -109,6 +109,9 @@ func start(p Preference, onStart func(p Preference)) {
 	window.SetContent(container)
 	window.Show()
 	closeMainWindow()
+	window.SetOnClosed(func() {
+		application.Quit()
+	})
 	onStart(p)
 }
 
