@@ -15,6 +15,7 @@ import (
 var application fyne.App
 var msgLabel *widget.Label
 var mainWindow fyne.Window
+var container *widget.ScrollContainer
 
 type Preference struct {
 	GroupEntityURL             string
@@ -104,7 +105,8 @@ func start(p Preference, onStart func(p Preference)) {
 	})
 	window.CenterOnScreen()
 	msgLabel = widget.NewLabel("")
-	window.SetContent(widget.NewVScrollContainer(msgLabel))
+	container = widget.NewVScrollContainer(msgLabel)
+	window.SetContent(container)
 	window.Show()
 	closeMainWindow()
 	onStart(p)
@@ -112,6 +114,8 @@ func start(p Preference, onStart func(p Preference)) {
 
 func Print(content string) {
 	msgLabel.SetText(msgLabel.Text + content)
+	adjust := msgLabel.MinSize().Height - container.Size().Height
+	container.Offset = fyne.NewPos(0, adjust)
 }
 
 func handleKey(excludeKeyEntry *widget.Entry, p *Preference) {
