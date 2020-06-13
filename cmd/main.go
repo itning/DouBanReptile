@@ -1,6 +1,8 @@
 package main
 
 import (
+	"DouBanReptile/internal/gui"
+	"DouBanReptile/internal/log"
 	"DouBanReptile/internal/markdown"
 	"DouBanReptile/internal/request"
 	"DouBanReptile/internal/scheduler"
@@ -8,7 +10,6 @@ import (
 	"flag"
 	"github.com/antchfx/htmlquery"
 	"golang.org/x/net/html"
-	"log"
 	"os"
 	"regexp"
 	"strconv"
@@ -26,22 +27,29 @@ var maxPrice *int
 var isIncludeNoContentPrice *bool
 
 func main() {
-	handleArgs()
-	headerMap := make(map[string]string)
-	headerMap["User-Agent"] = request.UserAgentPCChrome
+	//handleArgs()
+	gui.Open(func(p gui.Preference) {
+		doesNotAppear = p.ExcludeKeyArray
+		isIncludeNoContentPrice = &p.IncludeNoContentPriceCheck
+		maxPrice = &p.MaxPrice
+		groupURL = &p.GroupEntityURL
 
-	dispatcher = scheduler.Dispatcher{
-		BaseUrl: "https://www.douban.com",
-		Headers: headerMap,
-	}
-	dispatcher.Init2(
-		*groupURL,
-		`//td[@class='title']/a`,
-		each,
-		time.Millisecond*500,
-		&scheduler.PaginationRange{StartSize: 0, EndSize: 50, EveryAdd: 25})
+		headerMap := make(map[string]string)
+		headerMap["User-Agent"] = request.UserAgentPCChrome
 
-	write2File()
+		dispatcher = scheduler.Dispatcher{
+			BaseUrl: "https://www.douban.com",
+			Headers: headerMap,
+		}
+		dispatcher.Init2(
+			*groupURL,
+			`//td[@class='title']/a`,
+			each,
+			time.Millisecond*500,
+			&scheduler.PaginationRange{StartSize: 0, EndSize: p.MaxPage * 25, EveryAdd: 25})
+
+		write2File()
+	})
 }
 
 func handleArgs() {
@@ -54,10 +62,11 @@ func handleArgs() {
 	for _, key := range excludeKeyArray {
 		doesNotAppear = append(doesNotAppear, key)
 	}
-	log.Printf("群组：%s\n", *groupURL)
-	log.Printf("排除关键字：%s\n", doesNotAppear)
-	log.Printf("最大价格：%d\n", *maxPrice)
-	log.Printf("包含不带价格的：%t\n", *isIncludeNoContentPrice)
+	logger := log.GetImpl()
+	logger.Printf("群组：%s\n", *groupURL)
+	logger.Printf("排除关键字：%s\n", doesNotAppear)
+	logger.Printf("最大价格：%d\n", *maxPrice)
+	logger.Printf("包含不带价格的：%t\n", *isIncludeNoContentPrice)
 }
 
 func write2File() {
@@ -71,7 +80,7 @@ func write2File() {
 			panic(err)
 		}
 	}()
-	log.Printf("Size: %d\n", len(dataArray))
+	log.GetImpl().Printf("共爬取条数: %d\n", len(dataArray))
 	write([]byte(dataArray.String()))
 }
 
@@ -111,7 +120,7 @@ func getPriceFromString(title string) int {
 	if len(priceArray) != 0 {
 		price, e := strconv.Atoi(priceArray[0])
 		if e != nil {
-			log.Printf("Transform Error %s", e.Error())
+			log.GetImpl().Printf("Transform Error %s", e.Error())
 			panic(e)
 		}
 		return price

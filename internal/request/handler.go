@@ -1,9 +1,9 @@
 package request
 
 import (
+	"DouBanReptile/internal/log"
 	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -63,7 +63,7 @@ func (d *Data) addHeaders(request *http.Request) {
 // request handler
 func Handler(data Data) []byte {
 	data.format()
-	log.Printf("<==Method: %s Request: %s", data.Method, data.Url)
+	log.GetImpl().Printf("<==Method: %s Request: %s", data.Method, data.Url)
 	request, e := http.NewRequest(data.Method, data.Url, nil)
 	handlerError(e)
 	data.addCookies(request)
@@ -71,7 +71,7 @@ func Handler(data Data) []byte {
 	cli := http.Client{Timeout: time.Second * 10}
 	response, e := cli.Do(request)
 	handlerError(e)
-	log.Printf("==>Request: %s Done With Response Status: %d", data.Url, response.StatusCode)
+	log.GetImpl().Printf("==>Request: %s Done With Response Status: %d", data.Url, response.StatusCode)
 	readCloser := response.Body
 	defer func() {
 		handlerError(readCloser.Close())
@@ -83,7 +83,7 @@ func Handler(data Data) []byte {
 
 func handlerError(e error) {
 	if e != nil {
-		log.Printf("Have Error %s", e.Error())
+		log.GetImpl().Printf("Have Error %s", e.Error())
 		panic(e)
 	}
 }

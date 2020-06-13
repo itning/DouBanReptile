@@ -1,8 +1,8 @@
 package markdown
 
 import (
+	"DouBanReptile/internal/log"
 	"fmt"
-	"log"
 	"sort"
 	"strings"
 	"sync/atomic"
@@ -81,7 +81,7 @@ func (d Data) handleTitleToString() string {
 
 func handlerError(e error) {
 	if e != nil {
-		log.Printf("Have Error %s", e.Error())
+		log.GetImpl().Printf("Have Error %s", e.Error())
 		panic(e)
 	}
 }

@@ -1,11 +1,11 @@
 package xpath
 
 import (
+	"DouBanReptile/internal/log"
 	"bytes"
 	"errors"
 	"github.com/antchfx/htmlquery"
 	"golang.org/x/net/html"
-	"log"
 )
 
 type Data struct {
@@ -58,7 +58,7 @@ func (n Nodes) Attr(attr string) []string {
 
 func handlerError(e error) {
 	if e != nil {
-		log.Printf("Have Error %s", e.Error())
+		log.GetImpl().Printf("Have Error %s", e.Error())
 		panic(e)
 	}
 }
