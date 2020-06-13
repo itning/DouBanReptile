@@ -71,7 +71,7 @@ func handleArgs() {
 
 func write2File() {
 	var err error
-	file, err = os.Create("output.md")
+	file, err = os.Create("爬取结果.md")
 	if err != nil {
 		panic(err)
 	}
@@ -80,8 +80,11 @@ func write2File() {
 			panic(err)
 		}
 	}()
-	log.GetImpl().Printf("共爬取条数: %d\n", len(dataArray))
+	logger := log.GetImpl()
+	logger.Printf("共爬取条数: %d", len(dataArray))
+	logger.Printf("写入文件中....")
 	write([]byte(dataArray.String()))
+	logger.Printf("文件写入成功，请在本EXE目录下找【%s】文件", file.Name())
 }
 
 func write(b []byte) {

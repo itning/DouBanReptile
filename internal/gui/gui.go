@@ -100,7 +100,7 @@ func closeMainWindow() {
 func start(p Preference, onStart func(p Preference)) {
 	window := application.NewWindow("爬取中...")
 	window.Resize(fyne.Size{
-		Width:  400,
+		Width:  500,
 		Height: 200,
 	})
 	window.CenterOnScreen()
