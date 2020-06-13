@@ -13,6 +13,10 @@
 [![HitCount](http://hits.dwyl.io/itning/DouBanReptile.svg)](http://hits.dwyl.io/itning/DouBanReptile)
 [![language](https://img.shields.io/badge/language-GO-green.svg)](https://github.com/itning/DouBanReptile)
 
+## 下载
+
+[https://github.com/itning/DouBanReptile/releases](https://github.com/itning/DouBanReptile/releases)
+
 ## 构建
 
 ```shell
