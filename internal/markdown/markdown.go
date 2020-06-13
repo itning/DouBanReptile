@@ -9,7 +9,6 @@ import (
 	"time"
 )
 
-var loc, _ = time.LoadLocation("Asia/Shanghai")
 var num int32
 
 type Data struct {
@@ -58,6 +57,10 @@ func (p DataArray) Swap(i, j int) {
 }
 
 func String2Time(timeString string) time.Time {
+	loc, err := time.LoadLocation("Asia/shanghai")
+	if err != nil {
+		loc = time.FixedZone("CST", 8*3600)
+	}
 	theTime, err := time.ParseInLocation("2006-01-02 15:04:05", timeString, loc)
 	handlerError(err)
 	return theTime

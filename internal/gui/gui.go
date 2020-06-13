@@ -14,6 +14,7 @@ import (
 
 var application fyne.App
 var msgLabel *widget.Label
+var mainWindow fyne.Window
 
 type Preference struct {
 	GroupEntityURL             string
@@ -44,12 +45,12 @@ func Open(onStart func(p Preference)) {
 	}
 	application = app.New()
 
-	w := application.NewWindow("豆瓣租房小组爬虫")
-	w.Resize(fyne.Size{
+	mainWindow = application.NewWindow("豆瓣租房小组爬虫")
+	mainWindow.Resize(fyne.Size{
 		Width:  400,
 		Height: 200,
 	})
-	w.CenterOnScreen()
+	mainWindow.CenterOnScreen()
 	groupUrlEntry := widget.NewEntry()
 	groupUrlEntry.Text = p.GroupEntityURL
 
@@ -68,7 +69,7 @@ func Open(onStart func(p Preference)) {
 		p.IncludeNoContentPriceCheck = b
 	})
 
-	w.SetContent(widget.NewVBox(
+	mainWindow.SetContent(widget.NewVBox(
 		widget.NewLabel("设置豆瓣群组链接："),
 		groupUrlEntry,
 		widget.NewLabel("设置爬取页数："),
@@ -84,11 +85,15 @@ func Open(onStart func(p Preference)) {
 				if b {
 					start(p, onStart)
 				}
-			}, w)
+			}, mainWindow)
 		}),
 	))
 
-	w.ShowAndRun()
+	mainWindow.ShowAndRun()
+}
+
+func closeMainWindow() {
+	mainWindow.Close()
 }
 
 func start(p Preference, onStart func(p Preference)) {
@@ -101,6 +106,7 @@ func start(p Preference, onStart func(p Preference)) {
 	msgLabel = widget.NewLabel("")
 	window.SetContent(widget.NewVScrollContainer(msgLabel))
 	window.Show()
+	closeMainWindow()
 	onStart(p)
 }
 
