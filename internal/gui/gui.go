@@ -7,11 +7,14 @@ import (
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/dialog"
 	"fyne.io/fyne/widget"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
 )
 
+var version = "1.0"
+var author = "itning"
 var application fyne.App
 var msgLabel *widget.Label
 var mainWindow fyne.Window
@@ -46,12 +49,16 @@ func Open(onStart func(p Preference)) {
 	}
 	application = app.New()
 
-	mainWindow = application.NewWindow("豆瓣租房小组爬虫")
+	mainWindow = application.NewWindow("豆瓣租房小组爬虫 ver:" + version + " by " + author)
 	mainWindow.Resize(fyne.Size{
 		Width:  400,
 		Height: 200,
 	})
 	mainWindow.CenterOnScreen()
+
+	githubURL, _ := url.Parse("https://github.com/itning/DouBanReptile")
+	hyperLink := widget.NewHyperlink("访问GitHub点个Star", githubURL)
+
 	groupUrlEntry := widget.NewEntry()
 	groupUrlEntry.Text = p.GroupEntityURL
 
@@ -71,6 +78,7 @@ func Open(onStart func(p Preference)) {
 	})
 
 	mainWindow.SetContent(widget.NewVBox(
+		hyperLink,
 		widget.NewLabel("设置豆瓣群组链接："),
 		groupUrlEntry,
 		widget.NewLabel("设置爬取页数："),
