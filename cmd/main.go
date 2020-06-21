@@ -1,14 +1,14 @@
 package main
 
 import (
-	"DouBanReptile/internal/gui"
-	"DouBanReptile/internal/log"
-	"DouBanReptile/internal/markdown"
-	"DouBanReptile/internal/request"
-	"DouBanReptile/internal/scheduler"
-	"DouBanReptile/internal/xpath"
 	"flag"
 	"github.com/antchfx/htmlquery"
+	"github.com/itning/DouBanReptile/internal/gui"
+	"github.com/itning/DouBanReptile/internal/log"
+	"github.com/itning/DouBanReptile/internal/markdown"
+	"github.com/itning/DouBanReptile/internal/request"
+	"github.com/itning/DouBanReptile/internal/scheduler"
+	"github.com/itning/DouBanReptile/internal/xpath"
 	"golang.org/x/net/html"
 	"os"
 	"regexp"

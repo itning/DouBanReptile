@@ -1,10 +1,10 @@
 package xpath
 
 import (
-	"DouBanReptile/internal/log"
 	"bytes"
 	"errors"
 	"github.com/antchfx/htmlquery"
+	"github.com/itning/DouBanReptile/internal/log"
 	"golang.org/x/net/html"
 )
 

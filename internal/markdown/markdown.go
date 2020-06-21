@@ -1,8 +1,8 @@
 package markdown
 
 import (
-	"DouBanReptile/internal/log"
 	"fmt"
+	"github.com/itning/DouBanReptile/internal/log"
 	"sort"
 	"strings"
 	"sync/atomic"

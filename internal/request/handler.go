@@ -1,8 +1,8 @@
 package request
 
 import (
-	"DouBanReptile/internal/log"
 	"errors"
+	"github.com/itning/DouBanReptile/internal/log"
 	"io/ioutil"
 	"net/http"
 	"strings"

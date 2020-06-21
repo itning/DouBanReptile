@@ -1,10 +1,10 @@
 package scheduler
 
 import (
-	"DouBanReptile/internal/bloom"
-	"DouBanReptile/internal/request"
-	"DouBanReptile/internal/xpath"
 	"fmt"
+	"github.com/itning/DouBanReptile/internal/bloom"
+	"github.com/itning/DouBanReptile/internal/request"
+	"github.com/itning/DouBanReptile/internal/xpath"
 	"strings"
 	"sync"
 	"time"

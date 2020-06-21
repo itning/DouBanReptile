@@ -1,12 +1,12 @@
 package gui
 
 import (
-	"DouBanReptile/internal/log"
 	"fmt"
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/dialog"
 	"fyne.io/fyne/widget"
+	"github.com/itning/DouBanReptile/internal/log"
 	"net/url"
 	"os"
 	"strconv"

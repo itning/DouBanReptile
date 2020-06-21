@@ -1,8 +1,8 @@
 package xpath
 
 import (
-	"DouBanReptile/internal/request"
 	"fmt"
+	"github.com/itning/DouBanReptile/internal/request"
 	"testing"
 )
 

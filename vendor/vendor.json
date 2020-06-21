@@ -1,0 +1,508 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "hroaQTiWxenwXyQNB2bXS8i4hHk=",
+			"path": "fyne.io/fyne",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "O73fhag13q33VrmPRGlD5o8Ssto=",
+			"path": "fyne.io/fyne/app",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "8TxRltN6g3odhiI4rnBEgotGddk=",
+			"path": "fyne.io/fyne/canvas",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "TuCgW6ZB5+vBkFHrddkMxJCT29k=",
+			"path": "fyne.io/fyne/dialog",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "/UfyDDBCtVfdtRnxTVqRHgi+Ie8=",
+			"path": "fyne.io/fyne/driver/desktop",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "7xMAZA0DbnLzkRseCCCWdBg224U=",
+			"path": "fyne.io/fyne/driver/mobile",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "68/KPcWuQx+EeFZjFaNF9ANSoyA=",
+			"path": "fyne.io/fyne/internal",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "VqEu4hciEje2hiYyQbWQsBm7ELo=",
+			"path": "fyne.io/fyne/internal/app",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "FA2C8Uz7wGUOP9ttofaQMBSVmtM=",
+			"path": "fyne.io/fyne/internal/cache",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "c2a8yyhoTO1/RlDHmRwx2CjmiPI=",
+			"path": "fyne.io/fyne/internal/driver",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "GZqtrmDX+AvD+kXJ/TeEizGE5s0=",
+			"path": "fyne.io/fyne/internal/driver/glfw",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "Mv2LGiCwvFEmhFW/sUM9Ro0pLpU=",
+			"path": "fyne.io/fyne/internal/driver/gomobile",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "bmj1d6sI94/EFNX17gTSoY9TaT4=",
+			"path": "fyne.io/fyne/internal/painter",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "IdEW2cQCiIfnNIS3TNHCpKxzaTk=",
+			"path": "fyne.io/fyne/internal/painter/gl",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "fB8Ugyy31HsrLWuKSvNHG81qqgA=",
+			"path": "fyne.io/fyne/internal/painter/software",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "uWbHnBNF/wYmwh6m+ovhPPi6yA4=",
+			"path": "fyne.io/fyne/internal/widget",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "1r1RbYAarXCDa7rN4vDXAK9guuw=",
+			"path": "fyne.io/fyne/layout",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "OoNudnNnS+/s0arnZOX4MwtYCvI=",
+			"path": "fyne.io/fyne/storage",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "DYT8YgG8BPJviw1x4EHHHZljDAc=",
+			"path": "fyne.io/fyne/test",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "ydqUUVRNVJG9qgKZYwROyGqBvtE=",
+			"path": "fyne.io/fyne/theme",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "Ft/5mNG2e6tKrhAMejyJK8z4a2A=",
+			"path": "fyne.io/fyne/widget",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "LrRqwol6XY4jfIK9Y6x6VKO8YJM=",
+			"path": "github.com/antchfx/htmlquery",
+			"revision": "f04d0ddf47077a0882a3cfe6314b792c0ef526f7",
+			"revisionTime": "2020-04-29T12:59:14Z"
+		},
+		{
+			"checksumSHA1": "8UBfSSR7cLFg1yui3S5tDVNHNKs=",
+			"path": "github.com/antchfx/xpath",
+			"revision": "070fdf4497eeafd8ad7fa315375fdd94358f28e9",
+			"revisionTime": "2020-06-14T17:32:08Z"
+		},
+		{
+			"checksumSHA1": "aENNVxKxF9h9PfvTIstiAS5I3Lg=",
+			"origin": "fyne.io/fyne/vendor/github.com/davecgh/go-spew/spew",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "GfL9fMQeDqzw2Dbd6tL+xi6eFeI=",
+			"origin": "fyne.io/fyne/vendor/github.com/fsnotify/fsnotify",
+			"path": "github.com/fsnotify/fsnotify",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "HtCzdlBhB+NJtsS0qbR0KkPbulc=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/app",
+			"path": "github.com/fyne-io/mobile/app",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "VrPKlRJnYmO5x7fBaJJqu29n3dw=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/app/internal/callfn",
+			"path": "github.com/fyne-io/mobile/app/internal/callfn",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "8a9l1EIsVB9zXC12iCHHdjDuEwM=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/event/key",
+			"path": "github.com/fyne-io/mobile/event/key",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "MZQethh2UAE4PUlFL+MPqSBSVog=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/event/lifecycle",
+			"path": "github.com/fyne-io/mobile/event/lifecycle",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "IcAoDYz7CP+Z0ivm6TXv+/TcIR4=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/event/paint",
+			"path": "github.com/fyne-io/mobile/event/paint",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "YhQGa8r6axRT1bVYlK+MgJREtZo=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/event/size",
+			"path": "github.com/fyne-io/mobile/event/size",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "zruCw02kEskRTpXJMfRwNTdO8rc=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/event/touch",
+			"path": "github.com/fyne-io/mobile/event/touch",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "8agyl2Y8H9IR3E4+Br9+RoJS/Cs=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/exp/f32",
+			"path": "github.com/fyne-io/mobile/exp/f32",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "XFS/fhB7O/jQN+j+N979HvSCMWw=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/geom",
+			"path": "github.com/fyne-io/mobile/geom",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "9fANnlxM/w9U+kGUPmaS/cIW7EI=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/gl",
+			"path": "github.com/fyne-io/mobile/gl",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "Jx970k296Yk9unScMsiTGF1tTlU=",
+			"origin": "fyne.io/fyne/vendor/github.com/fyne-io/mobile/internal/mobileinit",
+			"path": "github.com/fyne-io/mobile/internal/mobileinit",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "EZLVuNzerlsC3JNR9ENp8VVn4eA=",
+			"origin": "fyne.io/fyne/vendor/github.com/go-gl/gl/v3.1/gles2",
+			"path": "github.com/go-gl/gl/v3.1/gles2",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "HBRXRaYus77QXNhTYPkJZ9TBx8M=",
+			"origin": "fyne.io/fyne/vendor/github.com/go-gl/gl/v3.2-core/gl",
+			"path": "github.com/go-gl/gl/v3.2-core/gl",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "DdpzvFK02qfE26fJjc7gcpaRYNk=",
+			"origin": "fyne.io/fyne/vendor/github.com/go-gl/glfw/v3.3/glfw",
+			"path": "github.com/go-gl/glfw/v3.3/glfw",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "9lgdIxrjvxVoY/gZ8GGVB4IJcvc=",
+			"origin": "fyne.io/fyne/vendor/github.com/godbus/dbus/v5",
+			"path": "github.com/godbus/dbus/v5",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "TNdxeyBFCxtYTUrtE03Zpvj9bzA=",
+			"origin": "fyne.io/fyne/vendor/github.com/goki/freetype",
+			"path": "github.com/goki/freetype",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "qDGPHYZok6vJA4vWF9kjQ78Jc3U=",
+			"origin": "fyne.io/fyne/vendor/github.com/goki/freetype/raster",
+			"path": "github.com/goki/freetype/raster",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "jge7hMNPv/P+n2Turf8N8fS0b8M=",
+			"origin": "fyne.io/fyne/vendor/github.com/goki/freetype/truetype",
+			"path": "github.com/goki/freetype/truetype",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "U9q8Wx/8LBcjHJNEkaz+2OI4npU=",
+			"path": "github.com/golang/groupcache/lru",
+			"revision": "8c9f03a8e57eb486e42badaed3fb287da51807ba",
+			"revisionTime": "2020-01-21T04:51:36Z"
+		},
+		{
+			"checksumSHA1": "R3yk3OJzuq4MVfVGX5AhkkYv1ko=",
+			"origin": "fyne.io/fyne/vendor/github.com/pmezard/go-difflib/difflib",
+			"path": "github.com/pmezard/go-difflib/difflib",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "l3wM5eI86CL7RMCIzf+xXprF3PI=",
+			"origin": "fyne.io/fyne/vendor/github.com/srwiley/oksvg",
+			"path": "github.com/srwiley/oksvg",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "KFf6+zkKNEKNkkzhdOvVfJ6xG/o=",
+			"origin": "fyne.io/fyne/vendor/github.com/srwiley/rasterx",
+			"path": "github.com/srwiley/rasterx",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "AOUsfQQHGp0oNqEdUDSD+MkS8SQ=",
+			"origin": "fyne.io/fyne/vendor/github.com/stretchr/testify/assert",
+			"path": "github.com/stretchr/testify/assert",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "d/XN5kgsEXMtUZ7mzB13cdfyyo8=",
+			"origin": "fyne.io/fyne/vendor/github.com/stretchr/testify/require",
+			"path": "github.com/stretchr/testify/require",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "w/kTxKWQAP12zLsT8qWLOVPBuss=",
+			"path": "github.com/willf/bitset",
+			"revision": "5e48506878a5639060278fb4d7137150116731d5",
+			"revisionTime": "2020-04-20T12:02:11Z"
+		},
+		{
+			"checksumSHA1": "oOlEhOJZzEfkZ+ypGiNAxL7jiek=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/colornames",
+			"path": "golang.org/x/image/colornames",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "hoVe/0utZ4lH4EY665layjL/334=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/draw",
+			"path": "golang.org/x/image/draw",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "lp8RPxrbaJFhenX9xgYjPoJbGoM=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/font",
+			"path": "golang.org/x/image/font",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "a0WL1/jbvw2o0AMtlIj1SnXGzf4=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/math/f64",
+			"path": "golang.org/x/image/math/f64",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "6YeR4oVqjbJp1IefiOrrMH2+sro=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/math/fixed",
+			"path": "golang.org/x/image/math/fixed",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "QjN3b/0D02wPe/Wm8So5Lh1jV3c=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/image/vector",
+			"path": "golang.org/x/image/vector",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "ozmp2tE2nJYZxhYAj0VwHS0Vz1U=",
+			"path": "golang.org/x/net/html",
+			"revision": "627f9648deb96c27737b83199d44bb5c1010cbcf",
+			"revisionTime": "2020-05-26T13:57:45Z"
+		},
+		{
+			"checksumSHA1": "XtSbs1gpyaEsIqf6VRhJsgOQe5U=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "627f9648deb96c27737b83199d44bb5c1010cbcf",
+			"revisionTime": "2020-05-26T13:57:45Z"
+		},
+		{
+			"checksumSHA1": "barUU39reQ7LdgYLA323hQ/UGy4=",
+			"path": "golang.org/x/net/html/charset",
+			"revision": "627f9648deb96c27737b83199d44bb5c1010cbcf",
+			"revisionTime": "2020-05-26T13:57:45Z"
+		},
+		{
+			"checksumSHA1": "VeW0pXu8d0b2nCX4ofwZx5r9Z9Y=",
+			"origin": "fyne.io/fyne/vendor/golang.org/x/sys/unix",
+			"path": "golang.org/x/sys/unix",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		},
+		{
+			"checksumSHA1": "tqqo7DEeFCclb58XbN44WwdpWww=",
+			"path": "golang.org/x/text/encoding",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "HgcUFTOQF5jOYtTIj5obR3GVN9A=",
+			"path": "golang.org/x/text/encoding/charmap",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "UYlVRSWAA5srH3iWvrJz++Zhpr0=",
+			"path": "golang.org/x/text/encoding/htmlindex",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "zeHyHebIZl1tGuwGllIhjfci+wI=",
+			"path": "golang.org/x/text/encoding/internal",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "46UIK1h/DTupMdRnLkijrEIwzv4=",
+			"path": "golang.org/x/text/encoding/internal/identifier",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "DhdZROnJq+cEcQ/sHY7GEq5wQ8U=",
+			"path": "golang.org/x/text/encoding/japanese",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "qHQ79q9peY8ZkCMC8kJAb52BAWg=",
+			"path": "golang.org/x/text/encoding/korean",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "55UdScb+EMOCPr7OW0hCwDsVxpg=",
+			"path": "golang.org/x/text/encoding/simplifiedchinese",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "9EZF1SHTpjVmaT9sARitvGKUXOY=",
+			"path": "golang.org/x/text/encoding/traditionalchinese",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "W00jrssFTBJPpLXYXTQCTqxpkww=",
+			"path": "golang.org/x/text/encoding/unicode",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "8ea1h1pimPfXc6cE5l3SQTe7SVo=",
+			"path": "golang.org/x/text/internal/language",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "GxBlFOqWoIsWCMswUHh6dUqM5no=",
+			"path": "golang.org/x/text/internal/language/compact",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "hyNCcTwMQnV6/MK8uUW9E5H0J0M=",
+			"path": "golang.org/x/text/internal/tag",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "Qk7dljcrEK1BJkAEZguxAbG9dSo=",
+			"path": "golang.org/x/text/internal/utf8internal",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "kgODOZdRLWKSppiHzrqOKdtrGHA=",
+			"path": "golang.org/x/text/language",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "IV4MN7KGBSocu/5NR3le3sxup4Y=",
+			"path": "golang.org/x/text/runes",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "cyTndUcU5NwdZciSFzbtKQsRLQA=",
+			"path": "golang.org/x/text/transform",
+			"revision": "23ae387dee1f90d29a23c0e87ee0b46038fbed0e",
+			"revisionTime": "2020-06-11T18:50:30Z"
+		},
+		{
+			"checksumSHA1": "YPOqTCFMxByLZFc6YLE37JnFhxQ=",
+			"origin": "fyne.io/fyne/vendor/gopkg.in/yaml.v2",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a82c32879cbaa36888e85389bda9d0dc72e3c5e5",
+			"revisionTime": "2020-06-16T15:48:23Z"
+		}
+	],
+	"rootPath": "github.com/itning/DouBanReptile"
+}
