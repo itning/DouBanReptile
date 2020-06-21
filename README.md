@@ -23,6 +23,8 @@
 go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 ```
 
+**爬取结果文件（markdown）建议使用[typora](https://typora.io/)打开**
+
 ### 截图
 
 ![a](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a.png)
