@@ -16,7 +16,7 @@ type Data struct {
 type Nodes []*html.Node
 
 func Parser(data Data) Nodes {
-	if data.Body == nil || data.Xpath == "" {
+	if nil == data.Body || "" == data.Xpath {
 		panic(errors.New("data attrs must not nil"))
 	}
 	node, e := htmlquery.Parse(bytes.NewReader(data.Body))

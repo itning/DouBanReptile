@@ -40,7 +40,7 @@ var filter = bloom.NewBloomFilter()
 func (d *Dispatcher) Init(firstUrl string, xpath string, callBack func(xpath.Nodes, request.Data), requestLimit time.Duration, page *Pagination) {
 	requestChan = make(chan requestData)
 	go d.do(requestLimit)
-	if page == nil {
+	if nil == page {
 		d.Add(firstUrl, xpath, callBack)
 	} else {
 		for i := page.StartPage; i <= page.EndPage; i++ {
@@ -53,7 +53,7 @@ func (d *Dispatcher) Init(firstUrl string, xpath string, callBack func(xpath.Nod
 func (d *Dispatcher) Init2(firstUrl string, xpath string, callBack func(xpath.Nodes, request.Data), requestLimit time.Duration, page *PaginationRange) {
 	requestChan = make(chan requestData)
 	go d.do(requestLimit)
-	if page == nil {
+	if nil == page {
 		d.Add(firstUrl, xpath, callBack)
 	} else {
 		for i := page.StartSize; i <= page.EndSize; i += page.EveryAdd {
@@ -111,7 +111,7 @@ func (d *Dispatcher) checkUrl(url string) bool {
 		return true
 	} else {
 		filter.Add(url)
-		if strings.HasPrefix(url, "javascript") || strings.HasPrefix(url, "/javascript") || strings.TrimSpace(url) == "" {
+		if strings.HasPrefix(url, "javascript") || strings.HasPrefix(url, "/javascript") || "" == strings.TrimSpace(url) {
 			return true
 		}
 		return false

@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-var version = "1.0"
+var version = "1.1.0"
 var author = "itning"
 var application fyne.App
 var msgLabel *widget.Label
@@ -142,7 +142,7 @@ func handleKey(excludeKeyEntry *widget.Entry, p *Preference) {
 func handlePriceInputChange(priceEntity *widget.Entry, p *Preference) func(string) {
 	return func(input string) {
 		if value, err := strconv.Atoi(input); err != nil {
-			if len(input) == 0 {
+			if 0 == len(input) {
 				priceEntity.SetText("")
 				p.MaxPrice = 9999
 			} else {
@@ -158,7 +158,7 @@ func handlePriceInputChange(priceEntity *widget.Entry, p *Preference) func(strin
 func handlePageInputChange(pageEntity *widget.Entry, p *Preference) func(string) {
 	return func(input string) {
 		if value, err := strconv.Atoi(input); err != nil {
-			if len(input) == 0 {
+			if 0 == len(input) {
 				pageEntity.SetText("1")
 				p.MaxPage = 1
 			} else {

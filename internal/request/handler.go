@@ -33,16 +33,16 @@ func AnalysisCookieString(cookies string) map[string]string {
 }
 
 func (d *Data) format() {
-	if d.Method == "" {
+	if "" == d.Method {
 		d.Method = http.MethodGet
 	}
-	if d.Url == "" {
+	if "" == d.Url {
 		panic(errors.New("url must not be empty"))
 	}
 }
 
 func (d *Data) addCookies(request *http.Request) {
-	if d.Cookies == nil {
+	if nil == d.Cookies {
 		return
 	}
 	for k, v := range d.Cookies {
@@ -52,7 +52,7 @@ func (d *Data) addCookies(request *http.Request) {
 }
 
 func (d *Data) addHeaders(request *http.Request) {
-	if d.Headers == nil {
+	if nil == d.Headers {
 		return
 	}
 	for k, v := range d.Headers {

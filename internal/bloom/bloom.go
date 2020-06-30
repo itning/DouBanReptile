@@ -34,7 +34,7 @@ func (bf Filter) Add(value string) {
 }
 
 func (bf Filter) Contains(value string) bool {
-	if value == "" {
+	if "" == value {
 		return false
 	}
 	ret := true

@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/antchfx/htmlquery"
 	"github.com/itning/DouBanReptile/internal/gui"
 	"github.com/itning/DouBanReptile/internal/log"
@@ -103,7 +104,7 @@ func each(nodes xpath.Nodes, request request.Data) {
 		price := getPriceFromString(titles[index])
 		if price != 0 && price <= (*maxPrice) {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
-		} else if price == 0 && *isIncludeNoContentPrice {
+		} else if 0 == price && *isIncludeNoContentPrice {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
 		}
 	}
@@ -137,8 +138,9 @@ func content(nodes xpath.Nodes, request request.Data) {
 		// 处理标题
 		title := handleTitle(node)
 		// 处理内容
-		content := handleContent(node)
-		if strings.Contains(content, "限女") {
+		content := handleContent(node, request)
+		// 排除关键字
+		if isExcludeContent(content) {
 			continue
 		}
 		// 处理图片
@@ -175,10 +177,20 @@ func handleImages(node *html.Node) []string {
 	return imgArray
 }
 
-func handleContent(node *html.Node) string {
+func handleContent(node *html.Node, request request.Data) string {
 	contentNode := htmlquery.FindOne(node, `//td[@class="topic-content"]`)
-	if contentNode == nil {
+	if nil == contentNode {
 		contentNode = htmlquery.FindOne(node, `//div[@class="topic-richtext"]`)
+	}
+	if nil == contentNode {
+		contentNode = htmlquery.FindOne(node, `//div[@class="topic-content"]`)
+	}
+	if nil == contentNode {
+		contentNode = htmlquery.FindOne(node, `//div[@class='rich-content topic-richtext']`)
+	}
+	if nil == contentNode {
+		log.GetImpl().Printf("Content Is Nil So Jump Over. URL=%s", request.Url)
+		return fmt.Sprintf("<内容爬取失败 URL=%s>", request.Url)
 	}
 	content := htmlquery.InnerText(contentNode)
 	return content
@@ -186,7 +198,7 @@ func handleContent(node *html.Node) string {
 
 func handleTitle(node *html.Node) string {
 	titleNode := htmlquery.FindOne(node, `//td[@class="tablecc"]`)
-	if titleNode == nil {
+	if nil == titleNode {
 		titleNode = htmlquery.FindOne(node, `//h1`)
 	}
 	title := htmlquery.InnerText(titleNode)
