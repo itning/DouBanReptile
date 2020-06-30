@@ -6,6 +6,7 @@ import (
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/dialog"
 	"fyne.io/fyne/widget"
+	"github.com/itning/DouBanReptile/internal/error2"
 	"github.com/itning/DouBanReptile/internal/log"
 	"net/url"
 	"os"
@@ -38,6 +39,7 @@ func Open(onStart func(p Preference)) {
 	_ = os.Setenv("FYNE_THEME", "light")
 	defer os.Unsetenv("FYNE_THEME")
 	defer os.Unsetenv("FYNE_FONT")
+	error2.SetImpl(ErrorHandler{})
 	log.SetImpl(Log{})
 
 	p := Preference{
@@ -120,7 +122,7 @@ func start(p Preference, onStart func(p Preference)) {
 	window.SetOnClosed(func() {
 		application.Quit()
 	})
-	onStart(p)
+	go onStart(p)
 }
 
 func Print(content string) {

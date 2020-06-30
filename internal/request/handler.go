@@ -2,6 +2,7 @@ package request
 
 import (
 	"errors"
+	"github.com/itning/DouBanReptile/internal/error2"
 	"github.com/itning/DouBanReptile/internal/log"
 	"io/ioutil"
 	"net/http"
@@ -32,13 +33,14 @@ func AnalysisCookieString(cookies string) map[string]string {
 	return cookieMap
 }
 
-func (d *Data) format() {
+func (d *Data) format() error {
 	if "" == d.Method {
 		d.Method = http.MethodGet
 	}
 	if "" == d.Url {
-		panic(errors.New("url must not be empty"))
+		return errors.New("url must not be empty")
 	}
+	return nil
 }
 
 func (d *Data) addCookies(request *http.Request) {
@@ -62,28 +64,39 @@ func (d *Data) addHeaders(request *http.Request) {
 
 // request handler
 func Handler(data Data) []byte {
-	data.format()
+	err := data.format()
+	if handlerError(err) {
+		return nil
+	}
 	log.GetImpl().Printf("<==Method: %s Request: %s", data.Method, data.Url)
 	request, e := http.NewRequest(data.Method, data.Url, nil)
-	handlerError(e)
+	if handlerError(e) {
+		return nil
+	}
 	data.addCookies(request)
 	data.addHeaders(request)
 	cli := http.Client{Timeout: time.Second * 10}
 	response, e := cli.Do(request)
-	handlerError(e)
+	if handlerError(e) {
+		return nil
+	}
 	log.GetImpl().Printf("==>Request: %s Done With Response Status: %d", data.Url, response.StatusCode)
 	readCloser := response.Body
 	defer func() {
 		handlerError(readCloser.Close())
 	}()
 	all, e := ioutil.ReadAll(readCloser)
-	handlerError(e)
+	if handlerError(e) {
+		return nil
+	}
 	return all
 }
 
-func handlerError(e error) {
-	if e != nil {
-		log.GetImpl().Printf("Have Error %s", e.Error())
-		panic(e)
+func handlerError(e error) bool {
+	if nil == e {
+		return false
+	} else {
+		error2.GetImpl().Handler(e)
+		return true
 	}
 }

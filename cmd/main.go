@@ -95,6 +95,10 @@ func write(b []byte) {
 }
 
 func each(nodes xpath.Nodes, request request.Data) {
+	if nil == nodes {
+		log.GetImpl().Printf("Node Is Nil. Url: %s", request.Url)
+		return
+	}
 	hrefs := nodes.Attr("href")
 	titles := nodes.Attr("title")
 	for index, href := range hrefs {

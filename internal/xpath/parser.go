@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"github.com/antchfx/htmlquery"
-	"github.com/itning/DouBanReptile/internal/log"
+	"github.com/itning/DouBanReptile/internal/error2"
 	"golang.org/x/net/html"
 )
 
@@ -17,7 +17,9 @@ type Nodes []*html.Node
 
 func Parser(data Data) Nodes {
 	if nil == data.Body || "" == data.Xpath {
-		panic(errors.New("data attrs must not nil"))
+		if handlerError(errors.New("data attrs must not nil\n")) {
+			return nil
+		}
 	}
 	node, e := htmlquery.Parse(bytes.NewReader(data.Body))
 	handlerError(e)
@@ -56,9 +58,11 @@ func (n Nodes) Attr(attr string) []string {
 	return vs
 }
 
-func handlerError(e error) {
-	if e != nil {
-		log.GetImpl().Printf("Have Error %s", e.Error())
-		panic(e)
+func handlerError(e error) bool {
+	if nil == e {
+		return false
+	} else {
+		error2.GetImpl().Handler(e)
+		return true
 	}
 }

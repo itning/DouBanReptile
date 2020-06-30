@@ -2,7 +2,7 @@ package markdown
 
 import (
 	"fmt"
-	"github.com/itning/DouBanReptile/internal/log"
+	"github.com/itning/DouBanReptile/internal/error2"
 	"sort"
 	"strings"
 	"sync/atomic"
@@ -62,7 +62,9 @@ func String2Time(timeString string) time.Time {
 		loc = time.FixedZone("CST", 8*3600)
 	}
 	theTime, err := time.ParseInLocation("2006-01-02 15:04:05", timeString, loc)
-	handlerError(err)
+	if handlerError(err) {
+		return time.Now()
+	}
 	return theTime
 }
 
@@ -82,9 +84,11 @@ func (d Data) handleTitleToString() string {
 	return fmt.Sprintf("[%s](%s)", d.Title, d.Link)
 }
 
-func handlerError(e error) {
-	if e != nil {
-		log.GetImpl().Printf("Have Error %s", e.Error())
-		panic(e)
+func handlerError(e error) bool {
+	if nil == e {
+		return false
+	} else {
+		error2.GetImpl().Handler(e)
+		return true
 	}
 }
