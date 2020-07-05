@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-var version = "1.1.0"
+var version = "1.1.1"
 var author = "itning"
 var application fyne.App
 var msgLabel *widget.Label
@@ -63,6 +63,13 @@ func Open(onStart func(p Preference)) {
 
 	groupUrlEntry := widget.NewEntry()
 	groupUrlEntry.Text = p.GroupEntityURL
+	groupUrlEntry.OnChanged = func(s string) {
+		groupUrl := strings.TrimSpace(s)
+		if "" == groupUrl {
+			return
+		}
+		p.GroupEntityURL = groupUrl
+	}
 
 	maxPriceEntry := widget.NewEntry()
 	maxPriceEntry.Text = strconv.Itoa(p.MaxPrice)
