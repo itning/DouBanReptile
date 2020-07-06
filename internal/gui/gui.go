@@ -22,16 +22,18 @@ var mainWindow fyne.Window
 var container *widget.ScrollContainer
 
 type Preference struct {
-	GroupEntityURL             string
-	MaxPrice                   int
-	IncludeNoContentPriceCheck bool
-	ExcludeKeyArray            []string
-	MaxPage                    int
+	GroupEntityURL             string   // 群组URL
+	MaxPrice                   int      // 最大价格
+	IncludeNoContentPriceCheck bool     // 包含标题没有写价格的
+	ExcludeKeyArray            []string // 排除关键字
+	IncludeKeyArray            []string // 包含关键字
+	MaxPage                    int      // 爬取最大页数
+	SavePreference             bool     // 是否持久化配置
 }
 
 func (p Preference) String() string {
-	return fmt.Sprintf("群组链接：%s\n最大价格：%d\n爬取不带价格的：%t\n排除关键字：%s\n爬取最大页数：%d\n",
-		p.GroupEntityURL, p.MaxPrice, p.IncludeNoContentPriceCheck, p.ExcludeKeyArray, p.MaxPage)
+	return fmt.Sprintf("群组链接：%s\n最大价格：%d\n爬取不带价格的：%t\n爬取关键字：%s\n排除关键字：%s\n爬取最大页数：%d\n",
+		p.GroupEntityURL, p.MaxPrice, p.IncludeNoContentPriceCheck, p.IncludeKeyArray, p.ExcludeKeyArray, p.MaxPage)
 }
 
 func Open(onStart func(p Preference)) {
@@ -79,12 +81,20 @@ func Open(onStart func(p Preference)) {
 	maxPageEntry.Text = strconv.Itoa(p.MaxPage)
 	maxPageEntry.OnChanged = handlePageInputChange(maxPageEntry, &p)
 
+	includeKeyEntry := widget.NewEntry()
+	includeKeyEntry.Text = ""
+
 	excludeKeyEntry := widget.NewEntry()
 	excludeKeyEntry.Text = "限女"
 
-	isIncludeNoContentPriceCheck := widget.NewCheck("爬取不带价格的", func(b bool) {
+	isIncludeNoContentPriceCheck := widget.NewCheck("也爬取不带价格的", func(b bool) {
 		p.IncludeNoContentPriceCheck = b
 	})
+
+	isSavePreferenceCheck := widget.NewCheck("保存配置(写入EXE所在目录DouBanConfig.ini文件)", func(b bool) {
+		p.SavePreference = b
+	})
+	isSavePreferenceCheck.Checked = true
 
 	mainWindow.SetContent(widget.NewVBox(
 		hyperLink,
@@ -94,11 +104,15 @@ func Open(onStart func(p Preference)) {
 		maxPageEntry,
 		widget.NewLabel("设置最大价格："),
 		maxPriceEntry,
-		widget.NewLabel("设置排除关键字（用|分隔）："),
+		widget.NewLabel("设置标题爬取关键字（用|分隔，不写全爬）："),
+		includeKeyEntry,
+		widget.NewLabel("设置标题和内容排除关键字（用|分隔）："),
 		excludeKeyEntry,
 		isIncludeNoContentPriceCheck,
+		isSavePreferenceCheck,
 		widget.NewButton("开始爬取", func() {
-			handleKey(excludeKeyEntry, &p)
+			p.IncludeKeyArray = handleKey(includeKeyEntry)
+			p.ExcludeKeyArray = handleKey(excludeKeyEntry)
 			dialog.ShowConfirm("确认", p.String(), func(b bool) {
 				if b {
 					start(p, onStart)
@@ -138,14 +152,15 @@ func Print(content string) {
 	container.Offset = fyne.NewPos(0, adjust)
 }
 
-func handleKey(excludeKeyEntry *widget.Entry, p *Preference) {
+func handleKey(excludeKeyEntry *widget.Entry) []string {
 	excludeKeyArray := strings.Split(excludeKeyEntry.Text, "|")
-	p.ExcludeKeyArray = []string{}
+	var temp []string
 	for _, key := range excludeKeyArray {
 		if key != "" {
-			p.ExcludeKeyArray = append(p.ExcludeKeyArray, key)
+			temp = append(temp, key)
 		}
 	}
+	return temp
 }
 
 func handlePriceInputChange(priceEntity *widget.Entry, p *Preference) func(string) {

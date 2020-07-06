@@ -20,9 +20,10 @@ import (
 
 var dispatcher scheduler.Dispatcher
 var file *os.File
-var priceCompile = regexp.MustCompile(`\b\d{4}\b`)
+var priceCompile = regexp.MustCompile(`\b\d{4}\b`) // 匹配标题中价格正则
 var dataArray = make(markdown.DataArray, 0)
-var doesNotAppear []string
+var includeKeyArray []string
+var excludeKeyArray []string
 var groupURL *string
 var maxPrice *int
 var isIncludeNoContentPrice *bool
@@ -30,7 +31,8 @@ var isIncludeNoContentPrice *bool
 func main() {
 	//handleArgs()
 	gui.Open(func(p gui.Preference) {
-		doesNotAppear = p.ExcludeKeyArray
+		includeKeyArray = p.IncludeKeyArray
+		excludeKeyArray = p.ExcludeKeyArray
 		isIncludeNoContentPrice = &p.IncludeNoContentPriceCheck
 		maxPrice = &p.MaxPrice
 		groupURL = &p.GroupEntityURL
@@ -61,11 +63,11 @@ func handleArgs() {
 	flag.Parse()
 	excludeKeyArray := strings.Split(*excludeKey, "|")
 	for _, key := range excludeKeyArray {
-		doesNotAppear = append(doesNotAppear, key)
+		excludeKeyArray = append(excludeKeyArray, key)
 	}
 	logger := log.GetImpl()
 	logger.Printf("群组：%s\n", *groupURL)
-	logger.Printf("排除关键字：%s\n", doesNotAppear)
+	logger.Printf("排除关键字：%s\n", excludeKeyArray)
 	logger.Printf("最大价格：%d\n", *maxPrice)
 	logger.Printf("包含不带价格的：%t\n", *isIncludeNoContentPrice)
 }
@@ -102,20 +104,33 @@ func each(nodes xpath.Nodes, request request.Data) {
 	hrefs := nodes.Attr("href")
 	titles := nodes.Attr("title")
 	for index, href := range hrefs {
+		if !isIncludeContent(titles[index]) {
+			continue
+		}
 		if isExcludeContent(titles[index]) {
 			continue
 		}
 		price := getPriceFromString(titles[index])
-		if price != 0 && price <= (*maxPrice) {
+		if *isIncludeNoContentPrice {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
-		} else if 0 == price && *isIncludeNoContentPrice {
+		} else if price != 0 && price <= (*maxPrice) {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
 		}
 	}
 }
 
+// 只要有一个关键字存在即返回真
+func isIncludeContent(content string) bool {
+	for _, key := range includeKeyArray {
+		if strings.Contains(content, key) {
+			return true
+		}
+	}
+	return false
+}
+
 func isExcludeContent(content string) bool {
-	for _, key := range doesNotAppear {
+	for _, key := range excludeKeyArray {
 		if strings.Contains(content, key) {
 			return true
 		}
