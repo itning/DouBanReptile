@@ -131,6 +131,10 @@ func each(nodes xpath.Nodes, request request.Data) {
 
 // 只要有一个关键字存在即返回真
 func isIncludeContent(content string) bool {
+	// 未设置关键字，则返回真
+	if 0 == len(includeKeyArray) {
+		return true
+	}
 	for _, key := range includeKeyArray {
 		if strings.Contains(content, key) {
 			return true
