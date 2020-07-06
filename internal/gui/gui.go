@@ -111,6 +111,12 @@ func checkPreference(p *preference.Preference) {
 	if "" == p.GroupEntityURL {
 		p.GroupEntityURL = "/group/554566/discussion?start=%d"
 	}
+	if 0 == p.MaxPage {
+		p.MaxPage = 1
+	}
+	if 0 == p.MaxPrice {
+		p.MaxPrice = 1000
+	}
 }
 
 func closeMainWindow() {
