@@ -9,4 +9,5 @@ require (
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/willf/bitset v1.1.11-0.20200420120211-5e48506878a5
 	golang.org/x/net v0.0.0-20200421231249-e086a090c8fd
+	gopkg.in/ini.v1 v1.57.0
 )

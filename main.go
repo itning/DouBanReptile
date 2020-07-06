@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"github.com/antchfx/htmlquery"
 	"github.com/itning/DouBanReptile/internal/gui"
+	"github.com/itning/DouBanReptile/internal/ini"
 	"github.com/itning/DouBanReptile/internal/log"
 	"github.com/itning/DouBanReptile/internal/markdown"
+	"github.com/itning/DouBanReptile/internal/preference"
 	"github.com/itning/DouBanReptile/internal/request"
 	"github.com/itning/DouBanReptile/internal/scheduler"
 	"github.com/itning/DouBanReptile/internal/xpath"
@@ -30,7 +32,8 @@ var isIncludeNoContentPrice *bool
 
 func main() {
 	//handleArgs()
-	gui.Open(func(p gui.Preference) {
+	gui.Open(func(p preference.Preference) {
+		savePreference(&p)
 		includeKeyArray = p.IncludeKeyArray
 		excludeKeyArray = p.ExcludeKeyArray
 		isIncludeNoContentPrice = &p.IncludeNoContentPriceCheck
@@ -53,6 +56,16 @@ func main() {
 
 		write2File()
 	})
+}
+
+func savePreference(preference *preference.Preference) {
+	fmt.Println("start")
+	fmt.Println(preference.SavePreference)
+	if preference.SavePreference {
+		fmt.Println("save")
+		config := ini.Config{}
+		config.Write(preference)
+	}
 }
 
 func handleArgs() {

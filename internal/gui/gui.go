@@ -1,56 +1,38 @@
 package gui
 
 import (
-	"fmt"
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/dialog"
 	"fyne.io/fyne/widget"
 	"github.com/itning/DouBanReptile/internal/error2"
+	"github.com/itning/DouBanReptile/internal/ini"
 	"github.com/itning/DouBanReptile/internal/log"
+	"github.com/itning/DouBanReptile/internal/preference"
 	"net/url"
 	"os"
 	"strconv"
 	"strings"
 )
 
-var version = "1.1.1"
+var version = "1.1.2"
 var author = "itning"
 var application fyne.App
 var msgLabel *widget.Label
 var mainWindow fyne.Window
 var container *widget.ScrollContainer
 
-type Preference struct {
-	GroupEntityURL             string   // 群组URL
-	MaxPrice                   int      // 最大价格
-	IncludeNoContentPriceCheck bool     // 包含标题没有写价格的
-	ExcludeKeyArray            []string // 排除关键字
-	IncludeKeyArray            []string // 包含关键字
-	MaxPage                    int      // 爬取最大页数
-	SavePreference             bool     // 是否持久化配置
-}
-
-func (p Preference) String() string {
-	return fmt.Sprintf("群组链接：%s\n最大价格：%d\n爬取不带价格的：%t\n爬取关键字：%s\n排除关键字：%s\n爬取最大页数：%d\n",
-		p.GroupEntityURL, p.MaxPrice, p.IncludeNoContentPriceCheck, p.IncludeKeyArray, p.ExcludeKeyArray, p.MaxPage)
-}
-
-func Open(onStart func(p Preference)) {
+func Open(onStart func(p preference.Preference)) {
 	_ = os.Setenv("FYNE_FONT", "C:\\Windows\\Fonts\\simsun.ttc")
 	_ = os.Setenv("FYNE_THEME", "light")
 	defer os.Unsetenv("FYNE_THEME")
 	defer os.Unsetenv("FYNE_FONT")
 	error2.SetImpl(ErrorHandler{})
 	log.SetImpl(Log{})
+	config := ini.Config{}
+	p := config.Read()
+	checkPreference(p)
 
-	p := Preference{
-		GroupEntityURL:             "/group/554566/discussion?start=%d",
-		MaxPrice:                   1500,
-		IncludeNoContentPriceCheck: false,
-		ExcludeKeyArray:            []string{},
-		MaxPage:                    10,
-	}
 	application = app.New()
 
 	mainWindow = application.NewWindow("豆瓣租房小组爬虫 ver:" + version + " by " + author)
@@ -75,17 +57,17 @@ func Open(onStart func(p Preference)) {
 
 	maxPriceEntry := widget.NewEntry()
 	maxPriceEntry.Text = strconv.Itoa(p.MaxPrice)
-	maxPriceEntry.OnChanged = handlePriceInputChange(maxPriceEntry, &p)
+	maxPriceEntry.OnChanged = handlePriceInputChange(maxPriceEntry, p)
 
 	maxPageEntry := widget.NewEntry()
 	maxPageEntry.Text = strconv.Itoa(p.MaxPage)
-	maxPageEntry.OnChanged = handlePageInputChange(maxPageEntry, &p)
+	maxPageEntry.OnChanged = handlePageInputChange(maxPageEntry, p)
 
 	includeKeyEntry := widget.NewEntry()
 	includeKeyEntry.Text = ""
 
 	excludeKeyEntry := widget.NewEntry()
-	excludeKeyEntry.Text = "限女"
+	excludeKeyEntry.Text = strings.Join(p.ExcludeKeyArray, "|")
 
 	isIncludeNoContentPriceCheck := widget.NewCheck("也爬取不带价格的", func(b bool) {
 		p.IncludeNoContentPriceCheck = b
@@ -94,6 +76,7 @@ func Open(onStart func(p Preference)) {
 	isSavePreferenceCheck := widget.NewCheck("保存配置(写入EXE所在目录DouBanConfig.ini文件)", func(b bool) {
 		p.SavePreference = b
 	})
+	p.SavePreference = true
 	isSavePreferenceCheck.Checked = true
 
 	mainWindow.SetContent(widget.NewVBox(
@@ -115,7 +98,7 @@ func Open(onStart func(p Preference)) {
 			p.ExcludeKeyArray = handleKey(excludeKeyEntry)
 			dialog.ShowConfirm("确认", p.String(), func(b bool) {
 				if b {
-					start(p, onStart)
+					start(*p, onStart)
 				}
 			}, mainWindow)
 		}),
@@ -124,11 +107,17 @@ func Open(onStart func(p Preference)) {
 	mainWindow.ShowAndRun()
 }
 
+func checkPreference(p *preference.Preference) {
+	if "" == p.GroupEntityURL {
+		p.GroupEntityURL = "/group/554566/discussion?start=%d"
+	}
+}
+
 func closeMainWindow() {
 	mainWindow.Close()
 }
 
-func start(p Preference, onStart func(p Preference)) {
+func start(p preference.Preference, onStart func(p preference.Preference)) {
 	window := application.NewWindow("爬取中...")
 	window.Resize(fyne.Size{
 		Width:  500,
@@ -163,7 +152,7 @@ func handleKey(excludeKeyEntry *widget.Entry) []string {
 	return temp
 }
 
-func handlePriceInputChange(priceEntity *widget.Entry, p *Preference) func(string) {
+func handlePriceInputChange(priceEntity *widget.Entry, p *preference.Preference) func(string) {
 	return func(input string) {
 		if value, err := strconv.Atoi(input); err != nil {
 			if 0 == len(input) {
@@ -179,7 +168,7 @@ func handlePriceInputChange(priceEntity *widget.Entry, p *Preference) func(strin
 	}
 }
 
-func handlePageInputChange(pageEntity *widget.Entry, p *Preference) func(string) {
+func handlePageInputChange(pageEntity *widget.Entry, p *preference.Preference) func(string) {
 	return func(input string) {
 		if value, err := strconv.Atoi(input); err != nil {
 			if 0 == len(input) {
