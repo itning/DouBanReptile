@@ -67,7 +67,7 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 
    6. 完成
 
-2. 如何设置排除关键字？
+2. 如何设置排除(包含)关键字？
 
    排除关键字是标题和内容只要出现关键字就会排除掉该条租房信息。
 
@@ -76,6 +76,8 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
    多个关键字用`|`分隔，注意是英文的。
 
    例如：`限女|短租|整租`，这三个关键字设置后，只要标题和内容出现这三个关键字软件就不会爬取。
+   
+   包含关键字只适用于标题，例如包含关键字为A，标题中含A，但内容中不含，会爬取；内容含A，标题不含，不会爬取。
 
 3. 关于识别标题中的价格
 
