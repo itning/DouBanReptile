@@ -59,10 +59,7 @@ func main() {
 }
 
 func savePreference(preference *preference.Preference) {
-	fmt.Println("start")
-	fmt.Println(preference.SavePreference)
 	if preference.SavePreference {
-		fmt.Println("save")
 		config := ini.Config{}
 		config.Write(preference)
 	}
