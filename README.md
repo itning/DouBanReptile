@@ -27,13 +27,13 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 
 ### 截图
 
-![a](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a.png)
+![a1](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a1.png)
 
-![b](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/b.png)
+![a2](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a2.png)
 
-![c](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/c.png)
+![a3](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a3png)
 
-![d](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/d.png)
+![a4](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a4.png)
 
 ## 使用教程
 
