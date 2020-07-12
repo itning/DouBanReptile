@@ -98,8 +98,12 @@ func each(nodes xpath.Nodes, request request.Data) {
 		price := getPriceFromString(titles[index])
 		if pre.IncludeNoContentPriceCheck {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
-		} else if price != 0 && price <= (pre.MaxPrice) {
+		} else if 0 != price && price <= (pre.MaxPrice) {
+			// 标题上有价格并且价格在用户设置范围内
 			dispatcher.Add(href, `//div[@class="article"]`, content)
+		} else if 0 == price {
+			// 标题上没有价格但是内容中可能有价格
+			dispatcher.Add(href, `//div[@class="article"]`, contentWithTitleNoPrice)
 		}
 	}
 }
@@ -155,6 +159,38 @@ func content(nodes xpath.Nodes, request request.Data) {
 		imgArray := handleImages(node)
 		// 处理时间
 		timeStr := handleTime(node)
+
+		dataArray.Append(markdown.Data{
+			TimeString: timeStr,
+			Time:       markdown.String2Time(timeStr),
+			Title:      format(title),
+			Price:      getPriceFromString(title),
+			Link:       request.Url,
+			Content:    content,
+			Images:     imgArray,
+		})
+	}
+}
+
+func contentWithTitleNoPrice(nodes xpath.Nodes, request request.Data) {
+	for _, node := range nodes {
+		// 处理内容
+		content := handleContent(node, request)
+		price := getPriceFromString(content)
+		if 0 == price || price > (pre.MaxPrice) {
+			// 内容中价格依然没有或者价格大于用户设定价格
+			continue
+		}
+		// 排除关键字
+		if isExcludeContent(content) {
+			continue
+		}
+		// 处理图片
+		imgArray := handleImages(node)
+		// 处理时间
+		timeStr := handleTime(node)
+		// 处理标题
+		title := handleTitle(node)
 
 		dataArray.Append(markdown.Data{
 			TimeString: timeStr,
