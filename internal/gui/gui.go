@@ -57,19 +57,9 @@ func Open(onStart func(p preference.Preference)) {
 
 	cookieEntry := widget.NewEntry()
 	cookieEntry.MultiLine = true
-	cookieEntry.Text = ""
+	cookieEntry.Text = splitCookieStringOnGUI(p.CookieString)
 	cookieEntry.OnChanged = func(s string) {
-		cookie := ""
-		array := strings.Split(s, ";")
-		for index, item := range array {
-			item = strings.TrimSpace(item)
-			if index == len(array)-1 {
-				cookie += item
-			} else {
-				cookie += item + ";\n"
-			}
-		}
-		cookieEntry.Text = cookie
+		cookieEntry.Text = splitCookieStringOnGUI(s)
 		p.CookieString = s
 	}
 
@@ -125,6 +115,20 @@ func Open(onStart func(p preference.Preference)) {
 	))
 
 	mainWindow.ShowAndRun()
+}
+
+func splitCookieStringOnGUI(s string) string {
+	cookie := ""
+	array := strings.Split(s, ";")
+	for index, item := range array {
+		item = strings.TrimSpace(item)
+		if index == len(array)-1 {
+			cookie += item
+		} else {
+			cookie += item + ";\n"
+		}
+	}
+	return cookie
 }
 
 func checkPreference(p *preference.Preference) {
