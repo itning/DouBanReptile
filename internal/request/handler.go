@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	UserAgentPCChrome    = `Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36`
+	UserAgentPCChrome    = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36`
 	UserAgentPhoneChrome = `Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Mobile Safari/537.36`
 )
 
@@ -25,9 +25,15 @@ type Data struct {
 // use F12 dev tools in browser and write [document.cookie] in console
 func AnalysisCookieString(cookies string) map[string]string {
 	cookieMap := make(map[string]string)
+	if "" == strings.TrimSpace(cookies) {
+		return cookieMap
+	}
 	cookieArray := strings.Split(cookies, "; ")
 	for _, cookie := range cookieArray {
 		cookie := strings.Split(cookie, "=")
+		if 1 == len(cookie) {
+			continue
+		}
 		cookieMap[cookie[0]] = cookie[1]
 	}
 	return cookieMap

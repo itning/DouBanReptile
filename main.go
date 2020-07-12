@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"github.com/antchfx/htmlquery"
 	"github.com/itning/DouBanReptile/internal/gui"
@@ -24,31 +23,24 @@ var dispatcher scheduler.Dispatcher
 var file *os.File
 var priceCompile = regexp.MustCompile(`\b\d{4}\b`) // 匹配标题中价格正则
 var dataArray = make(markdown.DataArray, 0)
-var includeKeyArray []string
-var excludeKeyArray []string
-var groupURL *string
-var maxPrice *int
-var isIncludeNoContentPrice *bool
+var pre preference.Preference
 
 func main() {
 	//handleArgs()
 	gui.Open(func(p preference.Preference) {
+		pre = p
 		savePreference(&p)
-		includeKeyArray = p.IncludeKeyArray
-		excludeKeyArray = p.ExcludeKeyArray
-		isIncludeNoContentPrice = &p.IncludeNoContentPriceCheck
-		maxPrice = &p.MaxPrice
-		groupURL = &p.GroupEntityURL
-
 		headerMap := make(map[string]string)
 		headerMap["User-Agent"] = request.UserAgentPCChrome
+		headerMap["Host"] = "www.douban.com"
 
 		dispatcher = scheduler.Dispatcher{
 			BaseUrl: "https://www.douban.com",
 			Headers: headerMap,
+			Cookies: request.AnalysisCookieString(p.CookieString),
 		}
 		dispatcher.Init2(
-			*groupURL,
+			pre.GroupEntityURL,
 			`//td[@class='title']/a`,
 			each,
 			time.Millisecond*500,
@@ -63,23 +55,6 @@ func savePreference(preference *preference.Preference) {
 		config := ini.Config{}
 		config.Write(preference)
 	}
-}
-
-func handleArgs() {
-	excludeKey := flag.String("e", "限女", "排除关键字用|分隔")
-	groupURL = flag.String("g", "/group/554566/discussion?start=%d", "设置豆瓣群组链接")
-	maxPrice = flag.Int("m", 1500, "设置最大价格")
-	isIncludeNoContentPrice = flag.Bool("i", false, "设置包含不带价格的")
-	flag.Parse()
-	excludeKeyArray := strings.Split(*excludeKey, "|")
-	for _, key := range excludeKeyArray {
-		excludeKeyArray = append(excludeKeyArray, key)
-	}
-	logger := log.GetImpl()
-	logger.Printf("群组：%s\n", *groupURL)
-	logger.Printf("排除关键字：%s\n", excludeKeyArray)
-	logger.Printf("最大价格：%d\n", *maxPrice)
-	logger.Printf("包含不带价格的：%t\n", *isIncludeNoContentPrice)
 }
 
 func write2File() {
@@ -121,9 +96,9 @@ func each(nodes xpath.Nodes, request request.Data) {
 			continue
 		}
 		price := getPriceFromString(titles[index])
-		if *isIncludeNoContentPrice {
+		if pre.IncludeNoContentPriceCheck {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
-		} else if price != 0 && price <= (*maxPrice) {
+		} else if price != 0 && price <= (pre.MaxPrice) {
 			dispatcher.Add(href, `//div[@class="article"]`, content)
 		}
 	}
@@ -132,10 +107,10 @@ func each(nodes xpath.Nodes, request request.Data) {
 // 只要有一个关键字存在即返回真
 func isIncludeContent(content string) bool {
 	// 未设置关键字，则返回真
-	if 0 == len(includeKeyArray) {
+	if 0 == len(pre.IncludeKeyArray) {
 		return true
 	}
-	for _, key := range includeKeyArray {
+	for _, key := range pre.IncludeKeyArray {
 		if strings.Contains(content, key) {
 			return true
 		}
@@ -144,7 +119,7 @@ func isIncludeContent(content string) bool {
 }
 
 func isExcludeContent(content string) bool {
-	for _, key := range excludeKeyArray {
+	for _, key := range pre.ExcludeKeyArray {
 		if strings.Contains(content, key) {
 			return true
 		}

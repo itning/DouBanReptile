@@ -10,6 +10,7 @@ type Preference struct {
 	IncludeKeyArray            []string // 包含关键字
 	MaxPage                    int      // 爬取最大页数
 	SavePreference             bool     // 是否持久化配置
+	CookieString               string   // See request#AnalysisCookieString Function
 }
 
 func (p Preference) String() string {

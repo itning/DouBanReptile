@@ -1,6 +1,7 @@
 package request
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -13,4 +14,11 @@ func TestHandler(t *testing.T) {
 func TestAnalysisCookieString(t *testing.T) {
 	cookieMap := AnalysisCookieString(`NOWCODERUID=792B9A5DA08as4A826ADS2FBFACFDF9BFD55A3; NOWCODERCLINETID=674ECEE734D6C1D29455B91; gr_user_id=5d4-ffc3-44b2-84ae-0e272a`)
 	t.Log(cookieMap)
+}
+
+func TestSplit(t *testing.T) {
+	array := strings.Split("asa=a", "=")
+	t.Log(array)
+	t.Log(len(array))
+	t.Log(cap(array))
 }

@@ -55,6 +55,24 @@ func Open(onStart func(p preference.Preference)) {
 		p.GroupEntityURL = groupUrl
 	}
 
+	cookieEntry := widget.NewEntry()
+	cookieEntry.MultiLine = true
+	cookieEntry.Text = ""
+	cookieEntry.OnChanged = func(s string) {
+		cookie := ""
+		array := strings.Split(s, ";")
+		for index, item := range array {
+			item = strings.TrimSpace(item)
+			if index == len(array)-1 {
+				cookie += item
+			} else {
+				cookie += item + ";\n"
+			}
+		}
+		cookieEntry.Text = cookie
+		p.CookieString = s
+	}
+
 	maxPriceEntry := widget.NewEntry()
 	maxPriceEntry.Text = strconv.Itoa(p.MaxPrice)
 	maxPriceEntry.OnChanged = handlePriceInputChange(maxPriceEntry, p)
@@ -83,6 +101,8 @@ func Open(onStart func(p preference.Preference)) {
 		hyperLink,
 		widget.NewLabel("设置豆瓣群组链接："),
 		groupUrlEntry,
+		widget.NewLabel("设置Cookie（如果遇到nil请设置）："),
+		cookieEntry,
 		widget.NewLabel("设置爬取页数："),
 		maxPageEntry,
 		widget.NewLabel("设置最大价格："),
