@@ -29,10 +29,10 @@ func (p *DataArray) Append(d Data) {
 
 func (p DataArray) String() string {
 	sort.Sort(p)
-	str := ""
+	str := "[TOC]\n"
 	for _, data := range p {
 		atomic.AddInt32(&num, 1)
-		str += fmt.Sprintf("%d. %s %s\n", num, data.TimeString, data.handleTitleToString())
+		str += fmt.Sprintf("###### %d. %s %s\n", num, data.TimeString, data.handleTitleToString())
 		str += fmt.Sprintf("%s\n", data.handleContentToString())
 		for _, img := range data.handleImageToString() {
 			str += fmt.Sprintf("%s\n", img)
