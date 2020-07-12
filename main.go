@@ -26,7 +26,6 @@ var dataArray = make(markdown.DataArray, 0)
 var pre preference.Preference
 
 func main() {
-	//handleArgs()
 	gui.Open(func(p preference.Preference) {
 		pre = p
 		savePreference(&p)
@@ -89,9 +88,6 @@ func each(nodes xpath.Nodes, request request.Data) {
 	hrefs := nodes.Attr("href")
 	titles := nodes.Attr("title")
 	for index, href := range hrefs {
-		if !isIncludeContent(titles[index]) {
-			continue
-		}
 		if isExcludeContent(titles[index]) {
 			continue
 		}
@@ -120,6 +116,17 @@ func isIncludeContent(content string) bool {
 		}
 	}
 	return false
+}
+
+// 只要关键字在标题或内容中即返回真
+func checkTitleOrContentHaveKey(title string, content string) bool {
+	if isIncludeContent(title) {
+		return true
+	} else if isIncludeContent(content) {
+		return true
+	} else {
+		return false
+	}
 }
 
 func isExcludeContent(content string) bool {
@@ -155,6 +162,9 @@ func content(nodes xpath.Nodes, request request.Data) {
 		if isExcludeContent(content) {
 			continue
 		}
+		if !checkTitleOrContentHaveKey(title, content) {
+			continue
+		}
 		// 处理图片
 		imgArray := handleImages(node)
 		// 处理时间
@@ -185,12 +195,16 @@ func contentWithTitleNoPrice(nodes xpath.Nodes, request request.Data) {
 		if isExcludeContent(content) {
 			continue
 		}
+		// 处理标题
+		title := handleTitle(node)
+
+		if !checkTitleOrContentHaveKey(title, content) {
+			continue
+		}
 		// 处理图片
 		imgArray := handleImages(node)
 		// 处理时间
 		timeStr := handleTime(node)
-		// 处理标题
-		title := handleTitle(node)
 
 		dataArray.Append(markdown.Data{
 			TimeString: timeStr,
