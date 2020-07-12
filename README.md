@@ -31,7 +31,7 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 
 ![main2](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/main2.png)
 
-![a3](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a3png)
+![a3](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a3.png)
 
 ![a4](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a4.png)
 
