@@ -27,13 +27,15 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 
 ### 截图
 
-![a1](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a1.png)
+![main](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/main.png)
 
-![a2](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a2.png)
+![main2](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/main2.png)
 
 ![a3](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a3png)
 
 ![a4](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/a4.png)
+
+![markdown](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/markdown.png)
 
 ## 使用教程
 
@@ -90,6 +92,22 @@ go build -ldflags="-s -w -H windowsgui" -o ..\bin\main.exe DouBanReptile/cmd
 5. 关于爬取结果文件(.md扩展名)如何打开
 
    建建议下载软件：[typora](https://typora.io/)
+   
+6. 如何设置cookie？
+
+   1. 打开豆瓣小组，例如：[https://www.douban.com/group/554566/discussion?start=0](https://www.douban.com/group/554566/discussion?start=0)
+   
+   2. 按`F12`打开开发者控制台，点击`Console`控制台选项卡
+
+      ![cookie1](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/cookie1.png)
+   
+   3. 输入`document.cookie`回车，复制内容（注意前后双引号不要复制）
+   
+      ![cookie2](https://raw.githubusercontent.com/itning/DouBanReptile/master/pic/cookie2.png)
+      
+   4. 将复制的内容粘贴在程序中
+   
+   
 
 ## 测试
 
