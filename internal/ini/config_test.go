@@ -2,19 +2,19 @@ package ini
 
 import (
 	"fmt"
-	"github.com/itning/DouBanReptile/internal/gui"
+	"github.com/itning/DouBanReptile/internal/preference"
 	"testing"
 )
 
 func TestRead(t *testing.T) {
 	var config = Config{}
-	preference := config.Read()
-	fmt.Println(*preference)
+	pre := config.Read()
+	fmt.Println(*pre)
 }
 
 func TestWrite1(t *testing.T) {
 	var config = Config{}
-	var preference = gui.Preference{
+	var pre = preference.Preference{
 		GroupEntityURL:             "a",
 		MaxPrice:                   0,
 		IncludeNoContentPriceCheck: true,
@@ -23,5 +23,5 @@ func TestWrite1(t *testing.T) {
 		MaxPage:                    1,
 		SavePreference:             true,
 	}
-	config.Write(&preference)
+	config.Write(&pre)
 }

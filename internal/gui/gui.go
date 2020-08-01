@@ -72,7 +72,7 @@ func Open(onStart func(p preference.Preference)) {
 	maxPageEntry.OnChanged = handlePageInputChange(maxPageEntry, p)
 
 	includeKeyEntry := widget.NewEntry()
-	includeKeyEntry.Text = ""
+	includeKeyEntry.Text = strings.Join(p.IncludeKeyArray, "|")
 
 	excludeKeyEntry := widget.NewEntry()
 	excludeKeyEntry.Text = strings.Join(p.ExcludeKeyArray, "|")
