@@ -15,7 +15,7 @@ import (
 	"strings"
 )
 
-var version = "1.1.5"
+var version = "1.1.6"
 var author = "itning"
 var application fyne.App
 var msgLabel *widget.Label
