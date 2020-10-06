@@ -219,7 +219,7 @@ func contentWithTitleNoPrice(nodes xpath.Nodes, request request.Data) {
 }
 
 func handleTime(node *html.Node) string {
-	timeNode := htmlquery.FindOne(node, `//span[@class="color-green"]`)
+	timeNode := htmlquery.FindOne(node, `//span[contains(@class,"color-green")]`)
 	timeStr := htmlquery.InnerText(timeNode)
 	return timeStr
 }
