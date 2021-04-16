@@ -10,7 +10,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/itning/DouBanReptile.svg)](https://github.com/itning/DouBanReptile/commits)
 [![GitHub release](https://img.shields.io/github/release/itning/DouBanReptile.svg)](https://github.com/itning/DouBanReptile/releases)
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/itning/DouBanReptile.svg)](https://github.com/itning/DouBanReptile)
-[![HitCount](http://hits.dwyl.io/itning/DouBanReptile.svg)](http://hits.dwyl.io/itning/DouBanReptile)
+[![HitCount](http://hits.dwyl.com/itning/DouBanReptile.svg)](http://hits.dwyl.com/itning/DouBanReptile)
 [![language](https://img.shields.io/badge/language-GO-green.svg)](https://github.com/itning/DouBanReptile)
 
 ## 下载
